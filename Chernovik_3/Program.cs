@@ -262,7 +262,7 @@ namespace chernovik2
                 Sr_r(sum_diap_3);
             }
         }
-        public int[,] M(int[,] nas)
+        public int M(int[,] nas)
         {
             if (nas[i, q] > 3)
             {
