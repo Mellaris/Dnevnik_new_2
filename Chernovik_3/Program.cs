@@ -27,6 +27,11 @@ namespace chernovik2
         private int count_3;
         private int count_4;
         private string[] week = new string[7];
+        private float d_1;
+        private float d_2;
+        private int d2;
+        private int i;
+        private int q;
 
         public void Ned()
         {
@@ -179,6 +184,13 @@ namespace chernovik2
                 Terrible();
             }
         }
+        public double Sr(double sum_m)
+        {
+            double sr_ned = sum_m / 7.0;
+            Console.WriteLine($"Среднее настроение за последнюю неделю: {sr_ned}");
+            Vibbor_2();
+            return sum_m;
+        }
         public void Sr_ned()
         {
             double sum_avg_2 = 0, sum_okt_2 = 0, sum_sen_2 = 0;
@@ -191,24 +203,9 @@ namespace chernovik2
                     sum_okt_2 = nastr_okt[i, q] + sum_okt_2;
                 }
             }
-            if (month == 1)
-            {
-                double sr_ned = sum_avg_2 / 7.0;
-                Console.WriteLine($"Среднее настроение за последнюю неделю: {sr_ned}");
-                Vibbor_2();
-            }
-            if (month == 3)
-            {
-                double sr_ned = sum_okt_2 / 7.0;
-                Console.WriteLine($"Среднее настроение за последнюю неделю: {sr_ned}");
-                Vibbor_2();
-            }
-            if (month == 2)
-            {
-                double sr_ned = sum_sen_2 / 7.0;
-                Console.WriteLine($"Среднее настроение за последнюю неделю: {sr_ned}");
-                Vibbor_2();
-            }
+            if (month == 1) { Sr(sum_avg_2); }
+            if (month == 2) { Sr(sum_sen_2); }
+            if (month == 3) { Sr(sum_okt_2); }
         }
         public void Vibbor_2()
         {
@@ -223,18 +220,26 @@ namespace chernovik2
                 Vopros();
             }
         }
+        public double Sr_r(float sum_mm)
+        {
+            ch = d_2 - d_1;
+            sr_diap = sum_mm / ch;
+            Console.WriteLine($"Среднее настроение с {d_1} по {d2}: {sr_diap}");
+            Vibbor_2();
+            return sum_mm;
+        }
         public void Sr_diap()
         {
             int sum_diap = 0, sum_diap_2 = 0, sum_diap_3 = 0;
             Console.Write("Введите начальную дату, с которой будет начинаться отсчет(Например: 5): ");
             int date_1 = Convert.ToInt32(Console.ReadLine());
-            float d_1 = date_1;
+            d_1 = date_1;
             date_1 = date_1 - 1;
             Console.Write("Введите конечную дату, до которой будет идти отсчет(Например: 20): ");
             int date_2 = Convert.ToInt32(Console.ReadLine());
-            int d2 = date_2;
+            d2 = date_2;
             date_2 = date_2 + 1;
-            float d_2 = date_2;
+            d_2 = date_2;
             for (int i = date_1; date_1 + 1 < date_2; date_1++)
             {
                 for (int q = 1; q < 2; q++)
@@ -246,25 +251,32 @@ namespace chernovik2
             }
             if (month == 1)
             {
-                ch = d_2 - d_1;
-                sr_diap = sum_diap / ch;
-                Console.WriteLine($"Среднее настроение с {d_1} августа по {d2} августа: {sr_diap}");
-                Vibbor_2();
+                Sr_r(sum_diap);
             }
             if (month == 2)
             {
-                ch = d_2 - d_1;
-                sr_diap = sum_diap_2 / ch;
-                Console.WriteLine($"Среднее настроение с {d_1} сентября по {d2} сентября: {sr_diap}");
-                Vibbor_2();
+                Sr_r(sum_diap_2);
             }
             if (month == 3)
             {
-                ch = d_2 - d_1;
-                sr_diap = sum_diap_3 / ch;
-                Console.WriteLine($"Среднее настроение с {d_1} октября по {d2} октября: {sr_diap}");
-                Vibbor_2();
+                Sr_r(sum_diap_3);
             }
+        }
+        public int[,] M(int[,] nas)
+        {
+            if (nas[i, q] > 3)
+            {
+                count++;
+            }
+            if (nas[i, q] == 4)
+            {
+                count_2++;
+            }
+            if (nas[i, q] == 5)
+            {
+                count_3++;
+            }
+            return nas[i,q];
         }
         public void Best()
         {
@@ -274,48 +286,15 @@ namespace chernovik2
                 {
                     if (month == 1)
                     {
-                        if (nastr_avg[i, q] > 3)
-                        {
-                            count++;
-                        }
-                        if (nastr_avg[i, q] == 4)
-                        {
-                            count_2++;
-                        }
-                        if (nastr_avg[i, q] == 5)
-                        {
-                            count_3++;
-                        }
+                        M(nastr_avg[i,q]);
                     }
                     if (month == 2)
                     {
-                        if (nastr_sen[i, q] > 3)
-                        {
-                            count++;
-                        }
-                        if (nastr_sen[i, q] == 4)
-                        {
-                            count_2++;
-                        }
-                        if (nastr_sen[i, q] == 5)
-                        {
-                            count_3++;
-                        }
+                        M(nastr_sen);
                     }
                     if (month == 3)
                     {
-                        if (nastr_okt[i, q] > 3)
-                        {
-                            count++;
-                        }
-                        if (nastr_okt[i, q] == 4)
-                        {
-                            count_2++;
-                        }
-                        if (nastr_okt[i, q] == 5)
-                        {
-                            count_3++;
-                        }
+                        M(nastr_okt);
                     }
                 }
             }
