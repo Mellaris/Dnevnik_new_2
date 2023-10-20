@@ -81,7 +81,7 @@ namespace chernovik2
             Console.WriteLine("Дневник настроения");
             Console.WriteLine("Календарь");
             Console.WriteLine("Август");
-            week = new string[7] { "ПН\t", "ВТ\t", "СР\t", "ЧТ\t", "ПТ\t", "СБ\t", "ВС\t" };  
+            week = new string[7] { "ПН\t", "ВТ\t", "СР\t", "ЧТ\t", "ПТ\t", "СБ\t", "ВС\t" };
             Cc(1);
             Console.WriteLine("Сентябрь");
             Cc(4);
@@ -121,7 +121,7 @@ namespace chernovik2
                     }
                 }
                 c++;
-            }    
+            }
         }
         public void Nastr_3()
         {
@@ -264,39 +264,39 @@ namespace chernovik2
         }
         public int M(int[,] nas)
         {
-            if (nas[i, q] > 3)
-            {
-                count++;
-            }
-            if (nas[i, q] == 4)
-            {
-                count_2++;
-            }
-            if (nas[i, q] == 5)
-            {
-                count_3++;
-            }
-            return nas[i,q];
-        }
-        public void Best()
-        {
             for (int i = 0; i < 31; i++)
             {
                 for (int q = 1; q < 2; q++)
                 {
-                    if (month == 1)
+                    if (nas[i, q] > 3)
                     {
-                        M(nastr_avg[i,q]);
+                        count++;
                     }
-                    if (month == 2)
+                    if (nas[i, q] == 4)
                     {
-                        M(nastr_sen);
+                        count_2++;
                     }
-                    if (month == 3)
+                    if (nas[i, q] == 5)
                     {
-                        M(nastr_okt);
+                        count_3++;
                     }
                 }
+            }
+            return nas[i, q];
+        }
+        public void Best()
+        {
+            if (month == 1)
+            {
+                M(nastr_avg);
+            }
+            if (month == 2)
+            {
+                M(nastr_sen);
+            }
+            if (month == 3)
+            {
+                M(nastr_okt);
             }
             Vivod();
             Vibbor_2();
@@ -307,70 +307,45 @@ namespace chernovik2
             Console.WriteLine($"Дней с настроением 4: {count_2}");
             Console.WriteLine($"Дней с настроением 5: {count_3}");
         }
-        public void Terrible()
+        public int T(int[,] nass)
         {
             for (int i = 0; i < 31; i++)
             {
                 for (int q = 1; q < 2; q++)
                 {
-                    if (month == 1)
+                    if (nass[i, q] < 4)
                     {
-                        if (nastr_avg[i, q] < 4)
-                        {
-                            count++;
-                        }
-                        if (nastr_avg[i, q] == 3)
-                        {
-                            count_2++;
-                        }
-                        if (nastr_avg[i, q] == 2)
-                        {
-                            count_3++;
-                        }
-                        if (nastr_avg[i, q] == 1)
-                        {
-                            count_4++;
-                        }
+                        count++;
                     }
-                    if (month == 2)
+                    if (nass[i, q] == 3)
                     {
-                        if (nastr_sen[i, q] < 4)
-                        {
-                            count++;
-                        }
-                        if (nastr_sen[i, q] == 3)
-                        {
-                            count_2++;
-                        }
-                        if (nastr_sen[i, q] == 2)
-                        {
-                            count_3++;
-                        }
-                        if (nastr_sen[i, q] == 1)
-                        {
-                            count_4++;
-                        }
+                        count_2++;
                     }
-                    if (month == 3)
+                    if (nass[i, q] == 2)
                     {
-                        if (nastr_okt[i, q] < 4)
-                        {
-                            count++;
-                        }
-                        if (nastr_okt[i, q] == 3)
-                        {
-                            count_2++;
-                        }
-                        if (nastr_okt[i, q] == 2)
-                        {
-                            count_3++;
-                        }
-                        if (nastr_okt[i, q] == 1)
-                        {
-                            count_4++;
-                        }
+                        count_3++;
+                    }
+                    if (nass[i, q] == 1)
+                    {
+                        count_4++;
                     }
                 }
+            }
+            return nass[i, q];
+        }
+        public void Terrible()
+        {
+            if (month == 1)
+            {
+                T(nastr_avg);
+            }
+            if (month == 2)
+            {
+                T(nastr_sen);
+            }
+            if (month == 3)
+            {
+                T(nastr_okt);
             }
             Vivod_2();
             Vibbor_2();
